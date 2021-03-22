@@ -1,0 +1,74 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ * Author:  user
+ * Created: 22-feb-2021
+ */
+
+CREATE TABLE REGISTROHORAS (
+    ID_REGISTROHORAS INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY,
+    ID_EMPLEADO INT NOT NULL,
+    FECHA DATE,
+    HORA_INICIO TIME,
+    HORA_FINAL TIME,
+    PRIMARY KEY (ID_REGISTROHORAS),
+    FOREIGN KEY (ID_EMPLEADO) REFERENCES EMPLEADO (ID_EMPLEADO)    
+);
+
+CREATE TABLE EMPLEADO (
+    ID_EMPLEADO INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY,
+    NOMBRE VARCHAR (100) NOT NULL, 
+    APELLIDO VARCHAR (100) NOT NULL,
+    ESTADO BOOLEAN NOT NULL DEFAULT TRUE,
+    ISADMIN BOOLEAN NOT NULL DEFAULT FALSE,
+    ID_USUARIO INT NOT NULL,
+    SESION BOOLEAN NOT NULL DEFAULT FALSE;
+    PRIMARY KEY (ID_EMPLEADO),
+    FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO (ID_USUARIO)
+);
+
+CREATE TABLE USUARIO(
+    ID_USUARIO INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+    EMAIL VARCHAR(30) NOT NULL UNIQUE, 
+    PASSWORD VARCHAR(30) NOT NULL,
+    ACTIVO BOOLEAN NOT NULL DEFAULT TRUE,
+    SESION BOOLEAN NOT NULL DEFAULT FALSE,
+    PRIMARY KEY (ID_USUARIO)
+);
+
+drop table USUARIO;
+
+ALTER TABLE USUARIO ADD ACTIVO BOOLEAN NOT NULL DEFAULT TRUE;
+ALTER TABLE USUARIO ADD SESION BOOLEAN NOT NULL DEFAULT FALSE;
+AlTER TABLE EMPLEADO ADD SESION BOOLEAN NOT NULL DEFAULT FALSE;
+
+INSERT INTO USUARIO (EMAIL, PASSWORD, ACTIVO, SESION)
+VALUES ('jimbrecht15@hotmail.com', '77777',true, false),('torres_12@hotmail.com','1234', true, false),
+('marcos@outlook', 'hass15', true, false), ('rinoPerz@gmail.com','j123p', true, false),
+('luis@ghf.es','1234', true, false), ('luis2@ghf.es','1234', true, false)
+
+INSERT INTO EMPLEADO (NOMBRE, APELLIDO, ESTADO, ISADMIN, ID_USUARIO)
+VALUES ('Johanna', 'simbrecht', true, false, 2), ('Manuel','Katzch', true, false, 1),
+('Marcos','Parzety', true, false, 3), ('Rino', 'Askquet', true, false, 4), ('Luis', 'Xthar', true, false, 5),
+('Luis', 'Txartano', true, false, 6)
+
+/*
+NUNCA OLVIDAR ESTAS FECHAS
+INSERT INTO REGISTROHORAS (ID_EMPLEADO, FECHA, HORA_INICIO, HORA_FINAL)
+VALUES (1,'2020-02-21','08:00','1:30'),(1,'2020-04-28', '1:35', '5:35'),
+       (1,'2020-05-03','09:30','5:30'),(1, '2020-05-04', '7:05', '3:48'),
+       (1, '2020-06-21', '4:35', '7:12'), (1, '2020-06-27', '5:34', '9:41'),
+       (1, '2020-07-07', '2:45', '7:26'), (1,'2020-07-08','1:24', '4:21')*/
+
+INSERT INTO REGISTROHORAS (ID_EMPLEADO, FECHA, HORA_INICIO, HORA_FINAL)
+VALUES (2,'2020-02-21','08:00','1:30'),(2,'2020-04-28', '1:35', '5:35'),
+       (2,'2020-05-03','09:30','5:30'),(3, '2020-05-04', '7:05', '3:48'),
+       (3, '2020-06-21', '4:35', '7:12'), (3, '2020-06-27', '5:34', '9:41'),
+       (4, '2020-07-07', '2:45', '7:26'), (4,'2020-07-08','1:24', '4:21')
+
+INSERT INTO REGISTROHORAS (ID_EMPLEADO, FECHA, HORA_INICIO, HORA_FINAL)
+VALUES (4, '2020-09-04', '9:15', NULL)
+

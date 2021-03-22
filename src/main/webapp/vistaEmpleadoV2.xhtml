@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/view/plantilla_menu.xhtml">
+
+            <ui:define name="top">
+                Registro de empleados
+            </ui:define>
+
+            <ui:define name="content">
+            </ui:define>
+
+            <ui:define name="bottom">
+              
+                    <h:form id="form">
+                        <p:dataTable class="text-center" value="#{empleadoMBA.colEmpleado}" 
+                                     reflow="true" var="empleado" selectionMode="single" 
+                                     editable="true" rows="10"
+                                     selection="#{empleadoMBA.empleado}" rowKey="#{empleadoMBA.idEmpleado}"
+                                     paginator="true" paginatorPosition="bottom"> 
+                           <p:column headerText="Nombres">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{empleado.nombre}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText id="modelInputNombre" value="#{empleado.nombre}" style="width:100%"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Apellidos">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{empleado.apellido}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText id="modelInputApellido" value="#{empleado.apellido}" style="width:100%"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Estado de la cuenta">         
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <!--{empleado.estado ? "Activa" : "Inactiva"}-->
+                                        <h:outputText value="#{empleadoMBA.estadoToString(empleado.estado)}">
+                                        </h:outputText>    
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:selectBooleanCheckbox id="modelInputEstado" value="#{empleado.estado}" style="width:100%"/>   
+                                    </f:facet>
+                                </p:cellEditor>                                
+                                
+                            </p:column>
+
+                            <p:column headerText="Es administrador">
+                                <!--{empleado.isadmin ? "Si" : "No"}-->
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <!--{empleado.estado ? "Activa" : "Inactiva"}-->
+                                        <h:outputText value="#{empleadoMBA.administracionToString(empleado.isadmin)}"/>   
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:selectBooleanCheckbox id="modelInputAdministracion" value="#{empleado.isadmin}" style="width:100%"/>   
+                                    </f:facet>     
+                                </p:cellEditor>    
+                            </p:column>
+                           
+                           <p:column headerText="">
+                               <p:commandButton class="btn" value="Baja/Activa" action="#{empleadoMBA.baja(empleado)}"/>
+                           </p:column>
+                            
+                            <p:column headerText="">
+                                <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+                            </p:column> 
+                           
+                        </p:dataTable>
+                    </h:form>
+   
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

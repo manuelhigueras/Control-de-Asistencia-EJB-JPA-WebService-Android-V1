@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.3"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
+
+    <navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>create-user</from-outcome>
+            <to-view-id>/registerUsuario.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listaEmpleado</from-outcome>
+            <if>#{loginMB.emailAsignado == null}</if>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listaEmpleado</from-outcome>
+            <if>#{loginMB.emailAsignado != null}</if>
+            <to-view-id>/vistaEmpleadoV2.xhtml</to-view-id>
+        </navigation-case>    
+        <navigation-case>
+            <from-outcome>create-empleado</from-outcome>
+            <if>#{loginMB.emailAsignado != null}</if>
+            <to-view-id>/registerEmpleado.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>create-empleado</from-outcome>
+            <if>#{loginMB.emailAsignado == null}</if>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>        
+        <navigation-case>
+            <from-outcome>registro-jornada</from-outcome>
+            <if>#{loginMB.emailAsignado != null}</if>
+            <to-view-id>/vistaRegistroJornada.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>registro-jornada</from-outcome>
+            <if>#{loginMB.emailAsignado == null}</if>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>                                
+    </navigation-rule>
+</faces-config>

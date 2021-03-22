@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="login.xhtml" x="1095" y="32" zoom="true"/>
+        <Node id="registerUsuario.xhtml" x="1635" y="32" zoom="true"/>
+        <Node id="index.xhtml" x="348" y="292" zoom="true"/>
+        <Node id="vistaEmpleadoV2.xhtml" x="791" y="32" zoom="true"/>
+        <Node id="registerEmpleado.xhtml" x="1328" y="32" zoom="true"/>
+        <Node id="*" x="599" y="32" zoom="true"/>
+        <Node id="vistaRegistroJornada.xhtml" x="34" y="32" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>
