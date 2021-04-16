@@ -7,7 +7,9 @@ package com.webRestFull;
 
 import WebService.*;
 import com.entidades.Usuario;
+import com.servicioWRF.UsuarioServiceLocalV2;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,7 +31,48 @@ import javax.ws.rs.core.MediaType;
 @Path("usuario")
 public class UsuarioRestFullWS{
 
+    @EJB
+    private UsuarioServiceLocalV2 service;
     
+    @POST
+    @Path("create")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Respuesta crearUsuario(Usuario usr){
+        Respuesta resp = new Respuesta();
+        try{
+            resp.setMensaje("Creacion exitosa");
+            this.service.alta(usr);
+            resp.setSinError(Boolean.TRUE);
+        }catch(Exception ex){
+            resp.setMensaje("Error");
+            resp.setSinError(Boolean.FALSE);
+        }
+        return resp;
+    }
+
+    @POST
+    @Path("baja")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})    
+    public Respuesta bajaUsuario(Usuario usr){
+        Respuesta resp = new Respuesta();
+        try{
+            resp.setMensaje("Creacion exitosa");
+            this.service.baja(usr);
+            resp.setSinError(Boolean.TRUE);
+        }catch(Exception ex){
+            resp.setMensaje("Error");
+            resp.setSinError(Boolean.FALSE);
+        }
+        return resp;        
+    }
+    
+//    @GET
+//    @Path("lista")
+//    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON}) 
+//    public List<Usuario> allUser(){
+//        List<Usuario> lista = (List<Usuario>) this.service.getAllUsuarios();
+//        return lista;
+//    }
     
 /*
     @POST

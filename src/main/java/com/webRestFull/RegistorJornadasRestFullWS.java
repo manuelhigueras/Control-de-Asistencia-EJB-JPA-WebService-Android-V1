@@ -6,7 +6,6 @@
 package com.webRestFull;
 
 import com.excepciones.RegistroJornadaException;
-import com.servicio.RegistroJornadaServiceLocal;
 import com.entidades.RegistroHoras;
 import java.util.List;
 import javax.ejb.EJB;
@@ -16,6 +15,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import com.servicioWRF.RegistroJornadaServicioLocalV2;
 
 /**
  *
@@ -26,7 +26,7 @@ import javax.ws.rs.core.MediaType;
 public class RegistorJornadasRestFullWS {
      
     @EJB 
-    private RegistroJornadaServiceLocal servicio;
+    private RegistroJornadaServicioLocalV2 servicio;
     
     @GET
     @Path("empleado/{idEmpleado}")

@@ -7,7 +7,8 @@ package com.webRestFull;
 
 import WebService.*;
 import com.entidades.Empleado;
-import com.servicio.EmpleadoServiceLocal;
+import com.excepciones.EmpleadoNotFoundException;
+import com.servicioWRF.EmpleadoServiceLocalV2;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -32,14 +33,41 @@ import javax.ws.rs.core.MediaType;
 public class EmpleadoRestFullWS{
 
     @EJB
-    private EmpleadoServiceLocal service;
+    private EmpleadoServiceLocalV2 service;
     
-//    @GET
-//    @Path("alta")
-//    @Consumes({MediaType.APPLICATION_JSON})    
-//    public void altaEmpleado(){
-//        
-//    }
+    @POST
+    @Path("create")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Respuesta altaEmpleado(Empleado emp) throws EmpleadoNotFoundException{
+        Respuesta resp = new Respuesta();
+        this.service.altaEmpleado(emp);
+        resp.setMensaje("Creacion exitosa");
+        resp.setSinError(Boolean.TRUE);
+        return resp;
+    }
+    
+    @POST
+    @Path("baja/{id}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Respuesta bajaEmpleado(@PathParam("id")Integer id, Empleado emp) throws EmpleadoNotFoundException{
+        Respuesta resp = new Respuesta();
+        this.service.baja(emp, id);
+        resp.setMensaje("Baja exitosa");
+        resp.setSinError(Boolean.TRUE);
+        return resp;
+    }
+    
+    @POST
+    @Path("modify")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Respuesta modificarEmpleado(Empleado emp){
+        Respuesta resp = new Respuesta();
+        this.service.modificar(emp);
+        resp.setMensaje("Modificacion exitosa");
+        resp.setSinError(Boolean.TRUE);
+        return resp;
+    }
+    
 //        
 //    @GET
 //    @Path("baja")
